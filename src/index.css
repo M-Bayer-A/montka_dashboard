@@ -1,1 +1,25 @@
 @import "tailwindcss";
+
+body {
+  overflow: auto;
+  margin: 0;
+  max-height: 100vh;
+  /* no more than the height of the viewport */
+}
+html {
+  overflow: hidden;
+  /* This one is important to avoid the propagation */
+}
+
+a:hover {
+  cursor: pointer; /* changes cursor to a hand */
+}
+
+/* ==FONTS== */
+@font-face {
+  font-family: Cairo;
+  src: url("src/assets/fonts/Cairo-VariableFont_slnt,wght.ttf")
+    format("truetype");
+  font-weight: 100 900;
+  font-style: normal;
+}
