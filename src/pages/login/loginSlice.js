@@ -3,6 +3,7 @@ import { createSlice } from "@reduxjs/toolkit";
 const initialState = {
   email: "",
   password: "",
+  otp: "",
 };
 //
 export const loginSlice = createSlice({
@@ -14,9 +15,10 @@ export const loginSlice = createSlice({
       return initialState;
     },
     setInputs: (state, actions) => {
-      const { email, password } = actions.payload;
+      const { email, password, otp } = actions.payload;
       state.email = email || email == "" ? email : state.email;
       state.password = password || password == "" ? password : state.password;
+      state.otp = otp || otp == "" ? otp : state.otp;
     },
   },
   // ==EXTRA REDUCERS==

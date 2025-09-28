@@ -4,7 +4,7 @@ import CustomTextInput from "../shared/customTextInput";
 import CustomPasswordInput from "../shared/customPasswordInput";
 import CustomButton from "../shared/customButton";
 
-export default function LoginForm() {
+export default function LoginCredentialsForm({ className }) {
   const inputs = useSelector(selectInputsInfo);
   const dispatch = useDispatch();
   console.log(inputs);
@@ -13,7 +13,7 @@ export default function LoginForm() {
       onSubmit={(e) => {
         e.preventDefault();
       }}
-      className="flex flex-col items-center w-full md:w-115 px-5 py-10 rounded-[20px] space-y-6 bg-white font-[Cairo]"
+      className={`${className} flex flex-col items-center w-full md:w-115 px-5 py-10 rounded-[20px] space-y-6 bg-white font-[Cairo]`}
     >
       <h1 className="font-[700] text-[22px]">تسجيل الدخول</h1>
       <div className="w-full flex flex-col items-end space-y-2">

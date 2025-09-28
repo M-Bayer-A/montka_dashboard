@@ -1,8 +1,6 @@
-import CustomButton from "../../components/shared/customButton";
-import CustomTextInput from "../../components/shared/customTextInput";
 import { customIcons, getIcon } from "../../helpers/iconsHelper";
-import CustomPasswordInput from "../../components/shared/customPasswordInput";
-import LoginForm from "../../components/login/loginForm";
+import LoginCredentialsForm from "../../components/login/loginCredentialsForm";
+import OtpAuthenticationForm from "../../components/login/otpAuthenticationForm";
 
 export default function LoginPage() {
   return (
@@ -14,7 +12,8 @@ export default function LoginPage() {
       {/* ==BLACK SIDE == */}
       {/* WHITE SIDE */}
       <div className="w-full md:w-1/2 h-full flex justify-center items-center">
-        <LoginForm />
+        <LoginCredentialsForm className={"hidden"} />
+        <OtpAuthenticationForm />
       </div>
       {/* ==WHITE SIDE== */}
     </div>
