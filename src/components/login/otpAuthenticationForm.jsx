@@ -1,10 +1,10 @@
 import { useDispatch, useSelector } from "react-redux";
 import CustomButton from "../shared/customButton";
 import CustomOtpInput from "../shared/customOtpInput";
-import { selectInputsInfo, setInputs } from "../../pages/login/loginSlice";
+import { selectLoginInputs, setInputs } from "../../pages/login/loginSlice";
 
 export default function OtpAuthenticationForm({ className }) {
-  const inputs = useSelector(selectInputsInfo);
+  const inputs = useSelector(selectLoginInputs);
   const dispatch = useDispatch();
   console.log(inputs);
   return (

@@ -1,18 +1,26 @@
 import { useDispatch, useSelector } from "react-redux";
-import { selectInputsInfo, setInputs } from "../../pages/login/loginSlice";
+import {
+  checkCredentials,
+  selectLoginInputs,
+  setCurrentFormID,
+  setInputs,
+} from "../../pages/login/loginSlice";
 import CustomTextInput from "../shared/customTextInput";
 import CustomPasswordInput from "../shared/customPasswordInput";
 import CustomButton from "../shared/customButton";
 
 export default function LoginCredentialsForm({ className }) {
-  const inputs = useSelector(selectInputsInfo);
+  const inputs = useSelector(selectLoginInputs);
   const dispatch = useDispatch();
   console.log(inputs);
+  const allowSubmit =
+    (inputs.email && inputs.password) ||
+    (inputs.email != "" && inputs.password != "")
+      ? true
+      : false;
+  //
   return (
-    <form
-      onSubmit={(e) => {
-        e.preventDefault();
-      }}
+    <div
       className={`${className} flex flex-col items-center w-full md:w-115 px-5 py-10 rounded-[20px] space-y-6 bg-white font-[Cairo]`}
     >
       <h1 className="font-[700] text-[22px]">تسجيل الدخول</h1>
@@ -33,16 +41,23 @@ export default function LoginCredentialsForm({ className }) {
           className={"w-full"}
         />
       </div>
-      <CustomButton title={"تسجيل الدخول"} />
+      <CustomButton
+        title={"تسجيل الدخول"}
+        disabled={!allowSubmit}
+        onClick={() => {
+          // dispatch(setCurrentFormID({ currentFormID: 2 }))
+          dispatch(checkCredentials());
+        }}
+      />
       <div className="w-full text-end underline font-[400] text-[14px]">
         <a
           onClick={() => {
-            console.log("clicked");
+            dispatch(setCurrentFormID({ currentFormID: 3 }));
           }}
         >
           نسيت كلمة المرور
         </a>
       </div>
-    </form>
+    </div>
   );
 }
