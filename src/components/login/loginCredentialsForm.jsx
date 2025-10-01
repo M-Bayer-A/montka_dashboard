@@ -12,7 +12,6 @@ import CustomButton from "../shared/customButton";
 export default function LoginCredentialsForm({ className }) {
   const inputs = useSelector(selectLoginInputs);
   const dispatch = useDispatch();
-  console.log(inputs);
   const allowSubmit =
     (inputs.email && inputs.password) ||
     (inputs.email != "" && inputs.password != "")

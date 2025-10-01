@@ -1,5 +1,5 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
-
+import { showToast } from "../../providers/toastProvider";
 //
 export const checkCredentials = createAsyncThunk(
   "loginPage/checkCredentials",
@@ -20,18 +20,13 @@ export const checkCredentials = createAsyncThunk(
 );
 //
 const initialState = {
+  isLoading: false,
+  currentFormID: 1,
   inputs: {
     email: "",
     password: "",
     otp: "",
   },
-  toast: {
-    open: false,
-    status: null,
-    message: "",
-  },
-  currentFormID: 1,
-  isLoading: false,
 };
 //
 export const loginSlice = createSlice({
@@ -53,9 +48,6 @@ export const loginSlice = createSlice({
       const { currentFormID } = actions.payload;
       state.currentFormID = currentFormID;
     },
-    closeToast: (state) => {
-      state.toast.open = false;
-    },
   },
   // ==EXTRA REDUCERS==
   extraReducers(builder) {
@@ -65,11 +57,12 @@ export const loginSlice = createSlice({
       })
       .addCase(checkCredentials.fulfilled, (state) => {
         state.isLoading = false;
-        state.toast = { open: true, message: "نجاح", status: "success" };
+        showToast("success", "نجاح");
         state.currentFormID = 2;
       })
       .addCase(checkCredentials.rejected, (state) => {
         state.isLoading = false;
+        showToast("error", "فشل");
       });
   },
 });
@@ -78,9 +71,7 @@ export const selectLoginInputs = (state) => state.loginPage.inputs;
 export const selectLoginCurrentFormID = (state) =>
   state.loginPage.currentFormID;
 export const selectIsLoginLoading = (state) => state.loginPage.isLoading;
-export const selectLoginToast = (state) => state.loginPage.toast;
 //
-export const { setInputs, resetInputs, setCurrentFormID, closeToast } =
-  loginSlice.actions;
+export const { setInputs, resetInputs, setCurrentFormID } = loginSlice.actions;
 
 export default loginSlice.reducer;

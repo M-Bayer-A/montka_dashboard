@@ -9,6 +9,7 @@ export default function CustomButton({
       disabled={disabled}
       onClick={onClick}
       className={`${className} px-3.5 py-1.5 rounded-[7px] bg-[#0EA5E9] text-white font-[700] text-[18px]
+        transition duration-300 ease-in-out
       disabled:bg-zinc-500 disabled:cursor-not-allowed  
       `}
     >

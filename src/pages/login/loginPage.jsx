@@ -4,21 +4,17 @@ import { customIcons, getIcon } from "../../helpers/iconsHelper";
 import LoginCredentialsForm from "../../components/login/loginCredentialsForm";
 import OtpAuthenticationForm from "../../components/login/otpAuthenticationForm";
 import ResetPasswordForm from "../../components/login/resetPasswordForm";
-import { useDispatch, useSelector } from "react-redux";
+import { useSelector } from "react-redux";
 import {
-  closeToast,
   selectIsLoginLoading,
   selectLoginCurrentFormID,
-  selectLoginToast,
+  // selectLoginToast,
 } from "./loginSlice";
-import CustomToast from "../../components/shared/customToast";
 //
 export default function LoginPage() {
   //
   const currentFormID = useSelector(selectLoginCurrentFormID);
   const isLoading = useSelector(selectIsLoginLoading);
-  const toastInfo = useSelector(selectLoginToast);
-  const dispatch = useDispatch();
   //
   return (
     <div className="w-screen h-screen flex md:flex-row flex-col gap-3 p-3 bg-zinc-100 overflow-auto">
@@ -43,17 +39,9 @@ export default function LoginPage() {
       <Backdrop
         sx={(theme) => ({ color: "#fff", zIndex: theme.zIndex.drawer + 1 })}
         open={isLoading}
-        // onClick={handleClose}
       >
         <CircularProgress color="inherit" />
       </Backdrop>
-      {/*  */}
-      <CustomToast
-        open={toastInfo.open}
-        status={toastInfo.status}
-        message={toastInfo.message}
-        onClose={() => dispatch(closeToast())}
-      />
     </div>
   );
 }

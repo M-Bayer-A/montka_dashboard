@@ -6,7 +6,6 @@ import CustomButton from "../shared/customButton";
 export default function ResetPasswordForm({ className }) {
   const inputs = useSelector(selectLoginInputs);
   const dispatch = useDispatch();
-  console.log(inputs);
   return (
     <form
       onSubmit={(e) => {

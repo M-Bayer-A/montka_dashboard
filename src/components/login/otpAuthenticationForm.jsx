@@ -6,7 +6,6 @@ import { selectLoginInputs, setInputs } from "../../pages/login/loginSlice";
 export default function OtpAuthenticationForm({ className }) {
   const inputs = useSelector(selectLoginInputs);
   const dispatch = useDispatch();
-  console.log(inputs);
   return (
     <form
       onSubmit={(e) => {
