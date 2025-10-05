@@ -5,11 +5,7 @@ import LoginCredentialsForm from "../../components/login/loginCredentialsForm";
 import OtpAuthenticationForm from "../../components/login/otpAuthenticationForm";
 import ResetPasswordForm from "../../components/login/resetPasswordForm";
 import { useSelector } from "react-redux";
-import {
-  selectIsLoginLoading,
-  selectLoginCurrentFormID,
-  // selectLoginToast,
-} from "./loginSlice";
+import { selectIsLoginLoading, selectLoginCurrentFormID } from "./loginSlice";
 //
 export default function LoginPage() {
   //

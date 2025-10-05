@@ -14,12 +14,61 @@ html {
 a:hover {
   cursor: pointer; /* changes cursor to a hand */
 }
-
+.white-svg {
+  filter: brightness(0) invert(1); /* Turns any color to white */
+}
+.black-svg {
+  filter: brightness(0) saturate(100%);
+}
 /* ==FONTS== */
+/* Cairo */
 @font-face {
   font-family: Cairo;
   src: url("src/assets/fonts/Cairo-VariableFont_slnt,wght.ttf")
     format("truetype");
   font-weight: 100 900;
+  font-style: normal;
+}
+/* Tajawal */
+@font-face {
+  font-family: "Tajawal";
+  src: url("./assets/fonts/tajawal/Tajawal-ExtraLight.ttf") format("truetype");
+  font-weight: 100;
+  font-style: normal;
+}
+@font-face {
+  font-family: "Tajawal";
+  src: url("./assets/fonts/tajawal/Tajawal-Light.ttf") format("truetype");
+  font-weight: 300;
+  font-style: normal;
+}
+@font-face {
+  font-family: "Tajawal";
+  src: url("./assets/fonts/tajawal/Tajawal-Regular.ttf") format("truetype");
+  font-weight: 400;
+  font-style: normal;
+}
+@font-face {
+  font-family: "Tajawal";
+  src: url("./assets/fonts/tajawal/Tajawal-Medium.ttf") format("truetype");
+  font-weight: 500;
+  font-style: normal;
+}
+@font-face {
+  font-family: "Tajawal";
+  src: url("./assets/fonts/tajawal/Tajawal-Bold.ttf") format("truetype");
+  font-weight: 700;
+  font-style: normal;
+}
+@font-face {
+  font-family: "Tajawal";
+  src: url("./assets/fonts/tajawal/Tajawal-ExtraBold.ttf") format("truetype");
+  font-weight: 800;
+  font-style: normal;
+}
+@font-face {
+  font-family: "Tajawal";
+  src: url("./assets/fonts/tajawal/Tajawal-Black.ttf") format("truetype");
+  font-weight: 900;
   font-style: normal;
 }
