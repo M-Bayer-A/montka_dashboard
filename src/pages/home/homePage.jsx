@@ -1,12 +1,13 @@
 import { useState } from "react";
 import CustomAppBar from "../../components/home/customAppBar";
-import Main from "../../components/home/customSideBar/main";
+import MainContent from "../../components/home/customSideBar/mainContent";
 import SideBar from "../../components/home/customSideBar/sideBar";
 import SideBarContainer from "../../components/home/customSideBar/sideBarContainer";
 import SideBarContent from "../../components/home/customSideBar/sideBarContent";
 import SideBarFooter from "../../components/home/customSideBar/sideBarFooter";
 import { customIcons, getIcon } from "../../helpers/iconsHelper";
 import SideBarButton from "../../components/home/customSideBar/sideBarButton";
+import { Outlet } from "react-router-dom";
 
 export default function HomePage() {
   const sectionList = [
@@ -51,18 +52,13 @@ export default function HomePage() {
       link: "history",
     },
   ];
-  const [open, setopen] = useState(false);
+  const [open, setopen] = useState(true);
+  const handleOpenSideBar = () => setopen(!open);
   return (
-    <div className="w-screen h-screen flex flex-col">
-      <CustomAppBar />
+    <div className="w-screen h-screen flex flex-col bg-zinc-100">
+      <CustomAppBar onClick={handleOpenSideBar} />
       <SideBarContainer>
-        <SideBar
-          open={open}
-          //   className={`font-[Tajawal] transition-all duration-300 ease-in-out
-          //             ${open ? "w-64 translate-x-0" : "w-16 -translate-x-0"}`}
-          //           className={`fixed right-0 top-0 h-full bg-black shadow-md transition-transform duration-300 ease-in-out
-          //   ${open ? "translate-x-0" : "-translate-x-[-100%]"}`}
-        >
+        <SideBar open={open}>
           <SideBarContent className={"space-y-5"}>
             {sectionList.map((section) => (
               <SideBarButton
@@ -73,40 +69,12 @@ export default function HomePage() {
               />
             ))}
           </SideBarContent>
-          <SideBarFooter></SideBarFooter>
+          <SideBarFooter>todo later</SideBarFooter>
         </SideBar>
-        <Main className="font-[Tajawal]">
-          <h1>Content</h1>
-          <button onClick={() => setopen(!open)}>scscscscsc</button>
-        </Main>
+        <MainContent>
+          <Outlet />
+        </MainContent>
       </SideBarContainer>
     </div>
   );
 }
-// {
-//   <div className="grow w-full flex flex-row gap-2 overflow-hidden">
-//     <div className="h-full grow overflow-auto">
-//       <div className="bg-amber-900 size-48"></div>
-//       <div className="bg-amber-900 size-48"></div>
-//       <div className="bg-amber-900 size-48"></div>
-//       <div className="bg-amber-900 size-48"></div>
-//       <div className="bg-amber-900 size-48"></div>
-//       <div className="bg-amber-300 size-48"></div>
-//     </div>
-//     <div className="flex flex-col py-5 bg-[#1F2937] text-white">
-//       {/* SideBar Header */}
-//       <div>
-//         <h1>المنتقى</h1>
-//       </div>
-//       {/* ==SideBar Header== */}
-//       <hr />
-//       {/* SideBar Content */}
-//       <div className="p-5 grow">Content</div>
-//       {/* ==SideBar Content== */}
-//       <hr />
-//       {/* SideBar Footer */}
-//       <div>Footer</div>
-//       {/* ==SideBar Footer== */}
-//     </div>
-//   </div>;
-// }

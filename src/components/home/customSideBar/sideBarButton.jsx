@@ -7,7 +7,7 @@ export default function SideBarButton({ active, icon, title }) {
       className={`w-full h-11 flex flex-row-reverse p-2.5 gap-2.5 rounded-[8px]
         ${active ? "bg-[#0EA5E9]" : "bg-transparent"}`}
     >
-      <img src={icon} />
+      <img src={icon} className="size-6" />
       <h1 className={`${open ? "" : "hidden"}`}>{title}</h1>
     </button>
   );

@@ -6,13 +6,8 @@ export default function SideBar({ children, className, open }) {
   return (
     <div
       className={`${className}
-         h-full flex flex-col bg-[#1F2937] text-white font-[Tajawal] transition-all duration-300 ease-in-out
-         md:relative fixed right-0 top-0
-         ${
-           open
-             ? "md:w-64 translate-x-0"
-             : "md:w-21 md:translate-x-0 translate-x-[-100%]"
-         }
+         h-full flex flex-col flex-shrink-0 bg-[#1F2937] text-white font-[Tajawal] transition-all duration-300 ease-in-out
+         ${open ? "w-64 translate-x-0" : "w-21 translate-x-0"}
          `}
     >
       <SideBarContext.Provider value={open}>

@@ -11,6 +11,7 @@ export const customIcons = {
   sections: "sections.svg",
   user: "user.svg",
   video: "video.svg",
+  sideBar: "sideBar.svg",
 };
 
 export function getIcon(icon) {
