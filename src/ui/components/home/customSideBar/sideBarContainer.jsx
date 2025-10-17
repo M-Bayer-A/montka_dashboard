@@ -1,7 +1,7 @@
 export default function SideBarContainer({ children, className }) {
   return (
     <div
-      className={`${className} grow w-full flex flex-row-reverse gap-2 overflow-hidden`}
+      className={`${className} grow w-full flex flex-row-reverse overflow-hidden`}
     >
       {children}
     </div>

@@ -8,12 +8,12 @@ export default function CustomButton({
     <button
       disabled={disabled}
       onClick={onClick}
-      className={`${className} px-3.5 py-1.5 rounded-[7px] bg-[#0EA5E9] text-white font-[700] text-[18px]
-        transition duration-300 ease-in-out
-      disabled:bg-zinc-500 disabled:cursor-not-allowed  
-      `}
+      className={`px-3.5 py-1.5 border rounded-[7px] transition duration-300 ease-in-out
+      disabled:bg-gray-50 disabled:text-gray-400 disabled:border-gray-200 disabled:cursor-not-allowed disabled:shadow-none
+      ${className} `}
     >
       {title}
     </button>
   );
 }
+// disabled:bg-zinc-500 disabled:text-white disabled:cursor-not-allowed

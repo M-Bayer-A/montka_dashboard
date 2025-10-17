@@ -25,6 +25,7 @@ export default function OtpAuthenticationForm({ className }) {
       />
       <CustomButton
         title={"تسجيل الدخول"}
+        className={"bg-[#0EA5E9] border-[#0EA5E9] text-white"}
         onClick={() => dispatch(checkOtpUseCase())}
       />
     </form>

@@ -6,7 +6,7 @@ export default function CustomCheckBox({
   return (
     <input
       type="checkbox"
-      className={`size-4 border-none`}
+      className={`${className}size-4 border-none`}
       checked={checked}
       onChange={(e) => onCheckChange(e.target.checked)}
     />

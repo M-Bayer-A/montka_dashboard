@@ -1,53 +1,14 @@
-import { useState } from "react";
-import CustomCheckBox from "../shared/customCheckBox";
-
 export default function CustomTable({ columns, data }) {
   //
-  const [selectedRowsIDs, setSelectedRowsIDs] = useState([]);
-  console.log(selectedRowsIDs);
-  //
-  const handleSelectRow = (id, checked) => {
-    setSelectedRowsIDs((state) =>
-      checked ? [...state, id] : state.filter((rowId) => rowId !== id)
-    );
-  };
-  const handleSelectAllRows = (checked) => {
-    if (checked) {
-      const allRowsId = data.map((row) => row.id);
-      setSelectedRowsIDs(allRowsId);
-    } else {
-      setSelectedRowsIDs([]);
-    }
-  };
-  //
-  const isAllRowsSelected =
-    data.length > 0 && selectedRowsIDs.length === data.length;
-  //
-  const isSomeRowsSelected = selectedRowsIDs.length > 0 && !isAllRowsSelected;
-  //
   return (
-    <div className="w-full h-fit overflow-hidden border rounded-2xl">
-      <div className="w-full max-h-110 overflow-auto  ">
-        <table className="min-w-full text-nowrap text-center border-collapse">
+    <div
+      dir={"rtl"}
+      className="w-full flex bg-white rounded-2xl overflow-hidden shadow-[0_0_4px_rgba(0,0,0,0.25)]"
+    >
+      <div className="min-w-full max-h-110 overflow-auto">
+        <table className="w-full h-full text-nowrap text-center border-collapse">
           <thead>
-            <tr className="bg-gray-50 h-10 sticky top-0 z-20 ">
-              <th className="w-fit px-4">
-                <div className="w-full h-full flex justify-center items-center">
-                  <CustomCheckBox
-                    className={`size-4
-                      ${isSomeRowsSelected ? "accent-white" : "accent-black"}`}
-                    checked={isSomeRowsSelected || isAllRowsSelected}
-                    onCheckChange={(value) => handleSelectAllRows(value)}
-                  />
-                  {/* <input
-                    type="checkbox"
-                    className={`size-4 border rounded-2xl
-                      ${isSomeRowsSelected ? "accent-white" : "accent-black"}`}
-                    checked={isSomeRowsSelected || isAllRowsSelected}
-                    onChange={(e) => handleSelectAllRows(e.target.checked)}
-                  /> */}
-                </div>
-              </th>
+            <tr className="h-10 bg-zinc-100 text-[#646D79] sticky top-0 z-20">
               {columns.map((column) => {
                 if (column.isVisible) {
                   return (
@@ -57,20 +18,11 @@ export default function CustomTable({ columns, data }) {
                   );
                 }
               })}
-              <th className="px-4 text-transparent">___</th>
             </tr>
           </thead>
           <tbody>
             {data.map((row) => (
-              <tr key={row.id} className="h-10">
-                <td>
-                  <input
-                    type="checkbox"
-                    className="size-3.5"
-                    checked={selectedRowsIDs.includes(row.id)}
-                    onChange={(e) => handleSelectRow(row.id, e.target.checked)}
-                  />
-                </td>
+              <tr key={row.id} className="h-10 text-[#717886]">
                 {columns.map((column) => {
                   if (column.isVisible) {
                     return (

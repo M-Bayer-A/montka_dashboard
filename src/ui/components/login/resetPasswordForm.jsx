@@ -22,9 +22,13 @@ export default function ResetPasswordForm({ className }) {
       <CustomTextInput
         type={"email"}
         value={inputs.email}
+        className={"w-full"}
         onChange={(value) => dispatch(setInputs({ email: value }))}
       />
-      <CustomButton title={"إعادة تعيين كلمة المرور"} />
+      <CustomButton
+        className={"bg-[#0EA5E9] border-[#0EA5E9] text-white"}
+        title={"إعادة تعيين كلمة المرور"}
+      />
     </form>
   );
 }

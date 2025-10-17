@@ -10,8 +10,11 @@ import {
 import { checkCredentialsUseCase } from "../../../application/useCases/login/checkCredentialsUseCase";
 
 export default function LoginCredentialsForm({ className }) {
-  const inputs = useSelector(loginSelectors.inputs);
+  //
   const dispatch = useDispatch();
+  //
+  const inputs = useSelector(loginSelectors.inputs);
+  //
   const allowSubmit =
     (inputs.email && inputs.password) ||
     (inputs.email != "" && inputs.password != "")
@@ -42,6 +45,7 @@ export default function LoginCredentialsForm({ className }) {
       </div>
       <CustomButton
         title={"تسجيل الدخول"}
+        className={"bg-[#0EA5E9] border-[#0EA5E9] text-white"}
         disabled={!allowSubmit}
         onClick={() => {
           dispatch(checkCredentialsUseCase());
