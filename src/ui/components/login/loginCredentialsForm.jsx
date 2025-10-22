@@ -20,6 +20,14 @@ export default function LoginCredentialsForm({ className }) {
     (inputs.email != "" && inputs.password != "")
       ? true
       : false;
+  // HANDLERS
+  const handleSetEmail = (value) => dispatch(setInputs({ email: value }));
+  const handleSetPassword = (value) => dispatch(setInputs({ password: value }));
+  const handleSubmit = () => {
+    dispatch(checkCredentialsUseCase());
+  };
+  const handleNavigateToResetPassword = () =>
+    dispatch(setCurrentFormID({ currentFormID: 3 }));
   //
   return (
     <div
@@ -30,7 +38,7 @@ export default function LoginCredentialsForm({ className }) {
         <label className="font-[400] text-[14px]">البريد الإلكتروني</label>
         <CustomTextInput
           value={inputs.email}
-          onChange={(value) => dispatch(setInputs({ email: value }))}
+          onChange={handleSetEmail}
           type="email"
           className={"w-full"}
         />
@@ -39,7 +47,7 @@ export default function LoginCredentialsForm({ className }) {
         <label className="font-[400] text-[14px]">كلمة المرور</label>
         <CustomPasswordInput
           value={inputs.password}
-          onChange={(value) => dispatch(setInputs({ password: value }))}
+          onChange={handleSetPassword}
           className={"w-full"}
         />
       </div>
@@ -47,18 +55,10 @@ export default function LoginCredentialsForm({ className }) {
         title={"تسجيل الدخول"}
         className={"bg-[#0EA5E9] border-[#0EA5E9] text-white"}
         disabled={!allowSubmit}
-        onClick={() => {
-          dispatch(checkCredentialsUseCase());
-        }}
+        onClick={handleSubmit}
       />
       <div className="w-full text-end underline font-[400] text-[14px]">
-        <a
-          onClick={() => {
-            dispatch(setCurrentFormID({ currentFormID: 3 }));
-          }}
-        >
-          نسيت كلمة المرور
-        </a>
+        <a onClick={handleNavigateToResetPassword}>نسيت كلمة المرور</a>
       </div>
     </div>
   );

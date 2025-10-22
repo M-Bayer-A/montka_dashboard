@@ -40,7 +40,7 @@ export const loginSlice = createSlice({
       .addCase(checkCredentialsUseCase.pending, (state) => {
         state.isLoading = true;
       })
-      .addCase(checkCredentialsUseCase.fulfilled, (state, actions) => {
+      .addCase(checkCredentialsUseCase.fulfilled, (state) => {
         state.isLoading = false;
 
         showToast("success", "نجاح");
@@ -54,7 +54,7 @@ export const loginSlice = createSlice({
       .addCase(checkOtpUseCase.pending, (state) => {
         state.isLoading = true;
       })
-      .addCase(checkOtpUseCase.fulfilled, (state, actions) => {
+      .addCase(checkOtpUseCase.fulfilled, (state) => {
         state.isLoading = false;
         showToast("success", "نجاح");
         state.isAuth = true;

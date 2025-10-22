@@ -13,10 +13,11 @@ import { useNavigate } from "react-router-dom";
 //
 export default function LoginPage() {
   //
+  const navigate = useNavigate();
+  //
   const currentFormID = useSelector(loginSelectors.currentFormID);
   const isLoading = useSelector(loginSelectors.isLoading);
   const isAuth = useSelector(loginSelectors.isAuth);
-  const navigate = useNavigate();
 
   useEffect(() => {
     if (isAuth) navigate("/home");

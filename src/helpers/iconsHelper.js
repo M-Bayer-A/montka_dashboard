@@ -12,6 +12,7 @@ export const customIcons = {
   user: "user.svg",
   video: "video.svg",
   sideBar: "sideBar.svg",
+  arrow: "arrow.svg",
 };
 
 export function getIcon(icon) {
