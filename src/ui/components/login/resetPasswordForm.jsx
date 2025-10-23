@@ -5,8 +5,13 @@ import CustomButton from "../shared/customButton";
 import { loginSelectors } from "../../../application/states/login/loginSelectors";
 
 export default function ResetPasswordForm({ className }) {
-  const inputs = useSelector(loginSelectors.inputs);
+  //
   const dispatch = useDispatch();
+  //
+  const inputs = useSelector(loginSelectors.inputs);
+  //
+  const handleSetEmail = (value) => dispatch(setInputs({ email: value }));
+  //
   return (
     <form
       onSubmit={(e) => {
@@ -23,7 +28,7 @@ export default function ResetPasswordForm({ className }) {
         type={"email"}
         value={inputs.email}
         className={"w-full"}
-        onChange={(value) => dispatch(setInputs({ email: value }))}
+        onChange={handleSetEmail}
       />
       <CustomButton
         className={"bg-[#0EA5E9] border-[#0EA5E9] text-white"}

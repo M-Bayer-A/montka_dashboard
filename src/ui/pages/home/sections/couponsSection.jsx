@@ -1,8 +1,8 @@
-import Skeleton, { SkeletonTheme } from "react-loading-skeleton";
-import CustomTable from "../../../components/home/customTable";
+import Skeleton from "react-loading-skeleton";
+import CustomTable from "../../../components/shared/customTable";
 import CustomButton from "../../../components/shared/customButton";
 import CustomTextInput from "../../../components/shared/customTextInput";
-import CustomFooter from "../../../components/home/customFooter";
+import CustomFooter from "../../../components/shared/customFooter";
 import { useDispatch, useSelector } from "react-redux";
 import { couponsSelectors } from "../../../../application/states/home/coupons/couponsSelectors";
 import { useEffect } from "react";

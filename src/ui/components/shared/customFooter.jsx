@@ -1,5 +1,5 @@
-import CustomButton from "../shared/customButton";
-import CustomTextInput from "../shared/customTextInput";
+import CustomButton from "./customButton";
+import CustomTextInput from "./customTextInput";
 
 export default function CustomFooter({
   paginationInfo,

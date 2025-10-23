@@ -1,5 +1,5 @@
 import { useDispatch, useSelector } from "react-redux";
-import CustomAccordion from "../../../components/home/customAccordion";
+import CustomAccordion from "../../../components/shared/customAccordion";
 import CustomButton from "../../../components/shared/customButton";
 import { sectionsSelectors } from "../../../../application/states/home/sections/sectionsSelectors";
 import {

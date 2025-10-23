@@ -6,8 +6,14 @@ import { checkOtpUseCase } from "../../../application/useCases/login/checkOtpUse
 import { loginSelectors } from "../../../application/states/login/loginSelectors";
 
 export default function OtpAuthenticationForm({ className }) {
-  const inputs = useSelector(loginSelectors.inputs);
+  //
   const dispatch = useDispatch();
+  //
+  const inputs = useSelector(loginSelectors.inputs);
+  //HANDLERS
+  const handleSetOTP = (value) => dispatch(setInputs({ otp: value }));
+  const handleSubmit = () => dispatch(checkOtpUseCase());
+  //
   return (
     <form
       onSubmit={(e) => {
@@ -19,14 +25,11 @@ export default function OtpAuthenticationForm({ className }) {
       <p className="text-right">
         لقد تم إرسال رمز تسجيل الدخول إلى البريد الالكتروني الخاص بك
       </p>
-      <CustomOtpInput
-        value={inputs.otp}
-        onChange={(value) => dispatch(setInputs({ otp: value }))}
-      />
+      <CustomOtpInput value={inputs.otp} onChange={handleSetOTP} />
       <CustomButton
         title={"تسجيل الدخول"}
         className={"bg-[#0EA5E9] border-[#0EA5E9] text-white"}
-        onClick={() => dispatch(checkOtpUseCase())}
+        onClick={handleSubmit}
       />
     </form>
   );

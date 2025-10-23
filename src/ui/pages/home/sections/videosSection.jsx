@@ -1,8 +1,8 @@
 import Skeleton, { SkeletonTheme } from "react-loading-skeleton";
-import CustomTable from "../../../components/home/customTable";
+import CustomTable from "../../../components/shared/customTable";
 import CustomButton from "../../../components/shared/customButton";
 import CustomTextInput from "../../../components/shared/customTextInput";
-import CustomFooter from "../../../components/home/customFooter";
+import CustomFooter from "../../../components/shared/customFooter";
 import { useDispatch, useSelector } from "react-redux";
 import { videosSelectors } from "../../../../application/states/home/videos/videosSelectors";
 import { getVideosTableInfoUseCase } from "../../../../application/useCases/home/videos/getVideosTableInfoUseCase";

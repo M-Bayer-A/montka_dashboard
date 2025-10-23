@@ -1,13 +1,13 @@
 import { useState } from "react";
 import { Outlet, useLocation, useNavigate } from "react-router-dom";
 import { customIcons, getIcon } from "../../../helpers/iconsHelper";
-import CustomAppBar from "../../components/home/customAppBar";
-import SideBar from "../../components/home/customSideBar/SideBar";
-import SideBarContainer from "../../components/home/customSideBar/SideBarContainer";
-import SideBarContent from "../../components/home/customSideBar/SideBarContent";
-import SideBarButton from "../../components/home/customSideBar/SideBarButton";
-import SideBarFooter from "../../components/home/customSideBar/SideBarFooter";
-import MainContent from "../../components/home/customSideBar/MainContent";
+import CustomAppBar from "../../components/shared/customAppBar";
+import SideBar from "../../components/shared/customSideBar/SideBar";
+import SideBarContainer from "../../components/shared/customSideBar/SideBarContainer";
+import SideBarContent from "../../components/shared/customSideBar/SideBarContent";
+import SideBarButton from "../../components/shared/customSideBar/SideBarButton";
+import SideBarFooter from "../../components/shared/customSideBar/SideBarFooter";
+import MainContent from "../../components/shared/customSideBar/MainContent";
 
 export default function HomePage() {
   const sectionList = [
