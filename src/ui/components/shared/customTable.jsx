@@ -8,7 +8,7 @@ export default function CustomTable({ columns, data }) {
       <div className="min-w-full max-h-110 overflow-auto">
         <table className="w-full h-full text-nowrap text-center border-collapse">
           <thead>
-            <tr className="h-10 bg-zinc-100 text-[#646D79] sticky top-0 z-20">
+            <tr className="h-10 bg-zinc-100 text-[#646D79] sticky top-0 z-5">
               {columns.map((column) => {
                 if (column.isVisible) {
                   return (

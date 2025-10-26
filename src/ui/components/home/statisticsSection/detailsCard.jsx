@@ -31,7 +31,7 @@ export default function DetailsCard() {
     },
   ];
   return (
-    <div className="w-full flex flex-row-reverse justify-between gap-2">
+    <div className="w-full flex md:flex-row-reverse flex-col justify-between gap-2">
       {details.map((d) =>
         isLoading.appDetails ? (
           <div className="w-full h-21">

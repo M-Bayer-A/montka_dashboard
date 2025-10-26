@@ -40,6 +40,38 @@ const statisticsRepo = {
   },
   getMostViewedVideos: async () => {
     await new Promise((resolve) => setTimeout(resolve, 2000));
+    return [
+      {
+        image: "src/assets/images/code.jpg",
+        title: "طريقة لعب كرة القدم",
+        section: "كرة القدم",
+        viewsNum: 300,
+      },
+      {
+        image: "src/assets/images/code.jpg",
+        title: "طريقة لعب كرة القدم",
+        section: "كرة القدم",
+        viewsNum: 300,
+      },
+      {
+        image: "src/assets/images/code.jpg",
+        title: "طريقة لعب كرة القدم",
+        section: "كرة القدم",
+        viewsNum: 300,
+      },
+      {
+        image: "src/assets/images/code.jpg",
+        title: "طريقة لعب كرة القدم",
+        section: "كرة القدم",
+        viewsNum: 300,
+      },
+      {
+        image: "src/assets/images/code.jpg",
+        title: "طريقة لعب كرة القدم",
+        section: "كرة القدم",
+        viewsNum: 300,
+      },
+    ];
   },
 };
 export default statisticsRepo;

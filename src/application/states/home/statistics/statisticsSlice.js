@@ -3,6 +3,7 @@ import { getAppDetailsUseCase } from "../../../useCases/home/statistics/getAppDe
 import { getCouponsStatusUseCase } from "../../../useCases/home/statistics/getCouponsStatusUseCase";
 import { getVideosSectionsUseCase } from "../../../useCases/home/statistics/getVideosSectionsUseCase";
 import { getLatestActivitiesUseCase } from "../../../useCases/home/statistics/getLastestActivitiesUseCase";
+import { getMostViewedVideosUseCase } from "../../../useCases/home/statistics/getMostViewedVideosUseCase";
 //
 const initialState = {
   isLoading: {
@@ -69,6 +70,17 @@ export const statisticsSlice = createSlice({
       })
       .addCase(getLatestActivitiesUseCase.rejected, (state) => {
         state.isLoading.latestActivities = false;
+      });
+    builder
+      .addCase(getMostViewedVideosUseCase.pending, (state) => {
+        state.isLoading.mostViewedVideos = true;
+      })
+      .addCase(getMostViewedVideosUseCase.fulfilled, (state, actions) => {
+        state.isLoading.mostViewedVideos = false;
+        state.mostViewedVideos = actions.payload.response;
+      })
+      .addCase(getMostViewedVideosUseCase.rejected, (state) => {
+        state.isLoading.mostViewedVideos = false;
       });
   },
 });

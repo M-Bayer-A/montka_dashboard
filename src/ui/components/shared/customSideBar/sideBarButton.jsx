@@ -1,7 +1,9 @@
-import { useIsSideBarOpen } from "./sideBar";
+import { useIsSideBarOpen } from "./sideBarProvider";
 
 export default function SideBarButton({ active, icon, title, onClick }) {
-  const open = useIsSideBarOpen();
+  //
+  const { isOpen } = useIsSideBarOpen();
+  //
   return (
     <button
       className={`w-full h-11 flex flex-row-reverse p-2.5 gap-2.5 rounded-[8px]
@@ -9,12 +11,12 @@ export default function SideBarButton({ active, icon, title, onClick }) {
       onClick={onClick}
     >
       <img src={icon} className="size-6" />
-      {/* <h1 className={`${open ? "" : "hidden"}`}>{title}</h1> */}
+      {/* <h1 className={`${isOpen ? "" : "hidden"}`}>{title}</h1> */}
       <h1
         className={`
           text-right overflow-hidden
           transition-all duration-300 ease-in-out
-        ${open ? "w-full" : "w-0"}`}
+        ${isOpen ? "w-full" : "w-0"}`}
       >
         {title}
       </h1>

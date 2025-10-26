@@ -8,6 +8,8 @@ import DetailsCard from "../../../components/home/statisticsSection/detailsCard"
 import CouponsStatusCard from "../../../components/home/statisticsSection/couponsStatusCard";
 import VideosSectionsCard from "../../../components/home/statisticsSection/videosSectionsCard";
 import LatestActivitiesCard from "../../../components/home/statisticsSection/latestActivitesCard";
+import MostViewedVideosCard from "../../../components/home/statisticsSection/mostViewedVideosCard";
+import { getMostViewedVideosUseCase } from "../../../../application/useCases/home/statistics/getMostViewedVideosUseCase";
 
 export default function StatisticsSection() {
   //
@@ -18,23 +20,20 @@ export default function StatisticsSection() {
     dispatch(getCouponsStatusUseCase());
     dispatch(getVideosSectionsUseCase());
     dispatch(getLatestActivitiesUseCase());
+    dispatch(getMostViewedVideosUseCase());
   }, [dispatch]);
   //
 
   return (
-    <div className="h-full w-full min-w-[750px] flex flex-col p-4 gap-5 overflow-auto">
+    <div className="min-h-full w-full md:min-w-[800px] flex flex-col p-4 gap-5">
       <DetailsCard />
-
-      <div className="w-full flex flex-row gap-5">
+      <div className="w-full flex md:flex-row flex-col gap-5">
         <CouponsStatusCard />
         <VideosSectionsCard />
       </div>
-      <div className="w-full flex flex-row gap-5">
+      <div className="w-full flex md:flex-row flex-col gap-5">
         <LatestActivitiesCard />
-        <div
-          className="w-full flex flex-col px-3.5 py-6.5 gap-2
-          bg-white rounded-xl shadow-[0_2px_4px_rgba(0,0,0,0.25)] text-right font-[Cairo]"
-        ></div>
+        <MostViewedVideosCard />
       </div>
     </div>
   );

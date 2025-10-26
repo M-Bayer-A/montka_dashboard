@@ -19,7 +19,7 @@ export default function SectionsSection() {
     dispatch(getSectionsInfoUseCase());
   }, [dispatch]);
   return (
-    <div className="h-full w-full min-w-[750px] flex flex-col p-4 gap-5 overflow-auto font-[Cairo]">
+    <div className="h-full w-full min-w-[750px] flex flex-col p-4 gap-5 font-[Cairo]">
       <div className="w-full flex flex-row justify-between gap-1">
         <CustomButton
           className="bg-[#0EA5E9] border-[#0EA5E9] font-[700] text-white"
