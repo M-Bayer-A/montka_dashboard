@@ -61,7 +61,7 @@ export default function HomePage() {
   const handleOpenSideBar = () => setopen(!open);
   //
   return (
-    <div className="w-screen h-screen flex flex-col bg-zinc-100">
+    <div className="w-screen h-screen flex flex-col bg-zinc-100 overflow-hidden">
       <CustomAppBar onClick={handleOpenSideBar} />
       <SideBarProvider isOpen={open} onClose={() => setopen(false)}>
         <SideBar>
