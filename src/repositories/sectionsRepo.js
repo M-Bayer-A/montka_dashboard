@@ -11,11 +11,36 @@ const sectionsRepo = {
           { id: 102, title: "كرة السلة", image: "src/assets/images/code.jpg" },
         ],
       },
-      { id: 1, title: "الطبخ", image: "", subSection: null },
-      { id: 2, title: "النفخ", image: "", subSection: null },
-      { id: 3, title: "الدراسة", image: "", subSection: null },
-      { id: 4, title: "إشلبدش", image: "", subSection: null },
-      { id: 5, title: "إشلبدش", image: "", subSection: null },
+      {
+        id: 1,
+        title: "الطبخ",
+        image: "src/assets/images/code.jpg",
+        subSection: null,
+      },
+      {
+        id: 2,
+        title: "النفخ",
+        image: "src/assets/images/code.jpg",
+        subSection: null,
+      },
+      {
+        id: 3,
+        title: "الدراسة",
+        image: "src/assets/images/code.jpg",
+        subSection: null,
+      },
+      {
+        id: 4,
+        title: "إشلبدش",
+        image: "src/assets/images/code.jpg",
+        subSection: null,
+      },
+      {
+        id: 5,
+        title: "إشلبدش",
+        image: "src/assets/images/code.jpg",
+        subSection: null,
+      },
     ];
   },
 };

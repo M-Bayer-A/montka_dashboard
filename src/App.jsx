@@ -7,6 +7,8 @@ import CouponsSection from "./ui/pages/home/sections/couponsSection";
 import { SkeletonTheme } from "react-loading-skeleton";
 import VideosSection from "./ui/pages/home/sections/videosSection";
 import SectionsSection from "./ui/pages/home/sections/sectionsSection";
+import PhrasesSection from "./ui/pages/home/sections/phrasesSection";
+import NotificationsSection from "./ui/pages/home/sections/notificationsSection";
 
 export default function App() {
   return (
@@ -24,6 +26,8 @@ export default function App() {
           <Route path="coupons" element={<CouponsSection />} />
           <Route path="videos" element={<VideosSection />} />
           <Route path="sections" element={<SectionsSection />} />
+          <Route path="phrases" element={<PhrasesSection />} />
+          <Route path="notifications" element={<NotificationsSection />} />
         </Route>
       </Routes>
     </SkeletonTheme>

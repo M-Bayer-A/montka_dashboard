@@ -11,6 +11,8 @@ import {
   setSearchInput,
 } from "../../../../application/states/home/videos/videosSlice";
 import { useEffect } from "react";
+import { BsBookmarkDashFill } from "react-icons/bs";
+import { BsBookmarkDash } from "react-icons/bs";
 
 export default function VideosSection() {
   //
@@ -25,8 +27,10 @@ export default function VideosSection() {
   //
   const handleGetTableInfo = (page) =>
     dispatch(getVideosTableInfoUseCase({ page }));
+
   const handleSetSearchValue = (value) =>
     dispatch(setSearchInput({ input: value }));
+
   const handleSetRowsPerPageNum = (value) =>
     dispatch(setNumberOfRowsPerPage({ number: value }));
   //
@@ -36,7 +40,7 @@ export default function VideosSection() {
   }, []);
   //
   return (
-    <div className="h-full w-full min-w-[750px] flex flex-col p-4 gap-5 overflow-auto font-[Cairo]">
+    <div className="min-h-full w-full min-w-[750px] flex flex-col p-4 gap-5 font-[Cairo]">
       <h1 className="w-full text-right text-[24px] font-[700]">
         إدارة الفيديوهات
       </h1>
@@ -87,6 +91,12 @@ const tableInfohelper = (tableInfo) => {
   let processedData = tableInfo.data.map((d) => {
     const newD = {
       ...d,
+      video: (
+        <div className="flex flex-row gap-4 p-2.5 items-center">
+          <img className="h-12.5 rounded-[6px]" src={d.video.image} />
+          <p>{d.video.title}</p>
+        </div>
+      ),
       procedures: (
         <div className="flex flex-row gap-2.5">
           <a className="text-[#4F46E5]">تعديل</a>
@@ -94,42 +104,21 @@ const tableInfohelper = (tableInfo) => {
         </div>
       ),
     };
-    switch (newD.status) {
-      case "مستخدم":
+    switch (newD.pinned) {
+      case true:
         return {
           ...newD,
-          status: (
-            <div className="size-fit flex px-2.5 py-1 rounded-[20px] font-[700] text-[12px] text-[#1E40AF] bg-[#DBEAFE]">
-              {newD.status}
-            </div>
-          ),
+          pinned: <BsBookmarkDashFill className="text-[#0EA5E9]" />,
         };
-      case "منتهي":
+      case false:
         return {
           ...newD,
-          status: (
-            <div className="size-fit flex px-2.5 py-1 rounded-[20px] font-[700] text-[12px] text-[#991B1B] bg-[#FEE2E2]">
-              {newD.status}
-            </div>
-          ),
-        };
-      case "متاح":
-        return {
-          ...newD,
-          status: (
-            <div className="size-fit flex px-2.5 py-1 rounded-[20px] font-[700] text-[12px] text-[#166534] bg-[#DCFCE7]">
-              {newD.status}
-            </div>
-          ),
+          pinned: <BsBookmarkDash />,
         };
       default:
         return {
           ...newD,
-          status: (
-            <div className="size-fit flex px-2.5 py-1 rounded-[20px] font-[700] text-[12px] text-[#1E40AF] bg-[#DBEAFE]">
-              {newD.status}
-            </div>
-          ),
+          pinned: <BsBookmarkDash />,
         };
     }
   });

@@ -25,8 +25,10 @@ export default function CouponsSection() {
   //
   const handleGetTableInfo = (page) =>
     dispatch(getCouponsTableInfoUseCase({ page }));
+
   const handleSetSearchValue = (value) =>
     dispatch(setSearchInput({ input: value }));
+
   const handleSetRowsPerPageNum = (value) =>
     dispatch(setNumberOfRowsPerPage({ number: value }));
   //
@@ -36,7 +38,7 @@ export default function CouponsSection() {
   }, []);
   //
   return (
-    <div className="h-full w-full min-w-[750px] flex flex-col p-4 gap-5 overflow-auto font-[Cairo]">
+    <div className="min-h-full w-full min-w-[750px] flex flex-col p-4 gap-5 font-[Cairo]">
       <h1 className="w-full text-right text-[24px] font-[700]">
         إدارة أكواد الدخول
       </h1>
