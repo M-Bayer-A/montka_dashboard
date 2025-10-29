@@ -9,6 +9,8 @@ import VideosSection from "./ui/pages/home/sections/videosSection";
 import SectionsSection from "./ui/pages/home/sections/sectionsSection";
 import PhrasesSection from "./ui/pages/home/sections/phrasesSection";
 import NotificationsSection from "./ui/pages/home/sections/notificationsSection";
+import UsersSection from "./ui/pages/home/sections/usersSection";
+import RecordSection from "./ui/pages/home/sections/recordSection";
 
 export default function App() {
   return (
@@ -28,6 +30,8 @@ export default function App() {
           <Route path="sections" element={<SectionsSection />} />
           <Route path="phrases" element={<PhrasesSection />} />
           <Route path="notifications" element={<NotificationsSection />} />
+          <Route path="users" element={<UsersSection />} />
+          <Route path="record" element={<RecordSection />} />
         </Route>
       </Routes>
     </SkeletonTheme>

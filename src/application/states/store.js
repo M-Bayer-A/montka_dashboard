@@ -6,7 +6,8 @@ import videosReducer from "./home/videos/videosSlice";
 import sectionsReducer from "./home/sections/sectionsSlice";
 import phrasesReducer from "./home/phrases/phrasesSlice";
 import notificationsReducer from "./home/notifications/notificationsSlice";
-
+import usersReducer from "./home/users/usersSlice";
+import recordReducer from "./home/record/recordSlice";
 export const store = configureStore({
   reducer: {
     login: loginReducer,
@@ -16,5 +17,7 @@ export const store = configureStore({
     sections: sectionsReducer,
     phrases: phrasesReducer,
     notifications: notificationsReducer,
+    users: usersReducer,
+    record: recordReducer,
   },
 });

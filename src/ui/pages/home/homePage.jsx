@@ -50,7 +50,7 @@ export default function HomePage() {
     {
       title: "السجل",
       icon: getIcon(customIcons.history),
-      url: "/home/history",
+      url: "/home/record",
     },
   ];
   //
