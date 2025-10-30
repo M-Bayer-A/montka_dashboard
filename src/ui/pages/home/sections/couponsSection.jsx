@@ -11,6 +11,9 @@ import {
   setNumberOfRowsPerPage,
   setSearchInput,
 } from "../../../../application/states/home/coupons/couponsSlice";
+import { copyTextHelper } from "../../../../helpers/copyTextHelper";
+import { Backdrop } from "@mui/material";
+import AddCouponPopup from "../../../components/home/couponsSection/addCouponPopup";
 
 export default function CouponsSection() {
   //
@@ -21,8 +24,6 @@ export default function CouponsSection() {
   const paginationInfo = useSelector(couponsSelectors.paginationInfo);
   const tableInfo = useSelector(couponsSelectors.tableInfo);
   //
-  const proccedtableInfo = tableInfohelper(tableInfo);
-  //
   const handleGetTableInfo = (page) =>
     dispatch(getCouponsTableInfoUseCase({ page }));
 
@@ -31,54 +32,15 @@ export default function CouponsSection() {
 
   const handleSetRowsPerPageNum = (value) =>
     dispatch(setNumberOfRowsPerPage({ number: value }));
+
+  const handleCopyCoupon = (code) => copyTextHelper(code);
   //
   useEffect(() => {
     handleGetTableInfo(1);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
   //
-  return (
-    <div className="min-h-full w-full min-w-[750px] flex flex-col p-4 gap-5 font-[Cairo]">
-      <h1 className="w-full text-right text-[24px] font-[700]">
-        إدارة أكواد الدخول
-      </h1>
-      <div className="w-full h-11 flex flex-row justify-between">
-        <form>
-          <CustomTextInput
-            value={searchInputValue}
-            onChange={handleSetSearchValue}
-            placeholder={"ابحث بالكود أو رقم المستخدم"}
-            className={
-              "w-87 bg-white border-zinc-200 shadow-[0_1px_2px_rgba(0,0,0,0.05)] text-right font-[Tajawal ]"
-            }
-          />
-        </form>
-        <CustomButton
-          className={"border-[#0EA5E9] bg-[#0EA5E9] text-white font-[700]"}
-          title={"+ إنشاء كود جديد"}
-        />
-      </div>
-      {isLoading ? (
-        <div className="w-full h-110">
-          <Skeleton width="100%" height="100%" />
-        </div>
-      ) : (
-        <CustomTable
-          columns={proccedtableInfo.columns}
-          data={proccedtableInfo.data}
-        />
-      )}
-      <CustomFooter
-        paginationInfo={paginationInfo}
-        onNumOfRowsChange={handleSetRowsPerPageNum}
-        getDataHandeler={handleGetTableInfo}
-      />
-    </div>
-  );
-}
-//
-const tableInfohelper = (tableInfo) => {
-  let processedColumns = [
+  const processedColumns = [
     ...tableInfo.columns,
     {
       accessorKey: "procedures",
@@ -86,13 +48,14 @@ const tableInfohelper = (tableInfo) => {
       isVisible: true,
     },
   ];
-  let processedData = tableInfo.data.map((d) => {
+
+  const processedData = tableInfo.data.map((d) => {
     const newD = {
       ...d,
       procedures: (
         <div className="flex flex-row gap-2.5">
-          <a className="text-[#4F46E5]">تعديل</a>
-          <a>نسخ</a>
+          {d.userNumber ? null : <a className="text-[#4F46E5]">تعديل</a>}
+          <a onClick={() => handleCopyCoupon(d.code)}>نسخ</a>
         </div>
       ),
     };
@@ -135,5 +98,41 @@ const tableInfohelper = (tableInfo) => {
         };
     }
   });
-  return { data: processedData, columns: processedColumns };
-};
+  //
+  return (
+    <div className="min-h-full w-full min-w-[750px] flex flex-col p-4 gap-5 font-[Cairo]">
+      <h1 className="w-full text-right text-[24px] font-[700]">
+        إدارة أكواد الدخول
+      </h1>
+      <div className="w-full h-11 flex flex-row justify-between">
+        <form>
+          <CustomTextInput
+            value={searchInputValue}
+            onChange={handleSetSearchValue}
+            placeholder={"ابحث بالكود أو رقم المستخدم"}
+            className={
+              "w-87 bg-white border-zinc-200 shadow-[0_1px_2px_rgba(0,0,0,0.05)] text-right font-[Tajawal ]"
+            }
+          />
+        </form>
+        <CustomButton
+          className={"border-[#0EA5E9] bg-[#0EA5E9] text-white font-[700]"}
+          title={"+ إنشاء كود جديد"}
+        />
+      </div>
+      {isLoading ? (
+        <div className="w-full h-110">
+          <Skeleton width="100%" height="100%" />
+        </div>
+      ) : (
+        <CustomTable columns={processedColumns} data={processedData} />
+      )}
+      <CustomFooter
+        paginationInfo={paginationInfo}
+        onNumOfRowsChange={handleSetRowsPerPageNum}
+        getDataHandeler={handleGetTableInfo}
+      />
+      <AddCouponPopup />
+    </div>
+  );
+}

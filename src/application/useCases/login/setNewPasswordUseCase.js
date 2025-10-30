@@ -1,11 +1,12 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
-import couponsRepo from "../../../../repositories/couponsRepo";
+import loginRepo from "../../../repositories/loginRepo";
 
-export const getCouponsTableInfoUseCase = createAsyncThunk(
-  "coupons/getCouponsTableInfo",
-  async ({ page = 1 }, { rejectWithValue }) => {
+export const setNewPasswordUseCase = createAsyncThunk(
+  "login/setNewPassword",
+  async (_, { getState, rejectWithValue }) => {
+    const inputs = getState().login.inputs;
     try {
-      const response = await couponsRepo.getTableInfo(page);
+      const response = await loginRepo.setNewPassword(inputs.email);
       return { success: true, response: response };
     } catch (err) {
       // return rejectWithValue(err.response?.data || "Something went wrong");

@@ -4,7 +4,6 @@ import { customIcons, getIcon } from "../../../helpers/iconsHelper";
 import LoginCredentialsForm from "../../components/login/loginCredentialsForm";
 import OtpAuthenticationForm from "../../components/login/OtpAuthenticationForm";
 import ResetPasswordForm from "../../components/login/ResetPasswordForm";
-
 import { useSelector } from "react-redux";
 import { loginSelectors } from "../../../application/states/login/loginSelectors";
 import { useEffect } from "react";

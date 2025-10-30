@@ -14,5 +14,11 @@ const loginRepo = {
       throw new Error("Data is not valid!");
     }
   },
+  setNewPassword: async (email) => {
+    await new Promise((resolve) => setTimeout(resolve, 2000));
+    if (!email) {
+      throw new Error("Data is not valid!");
+    }
+  },
 };
 export default loginRepo;

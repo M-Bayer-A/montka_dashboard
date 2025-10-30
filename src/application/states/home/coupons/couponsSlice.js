@@ -1,6 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
 import { getCouponsTableInfoUseCase } from "../../../useCases/home/coupons/getCouponsTableInfoUseCase";
-
 //
 const initialState = {
   isLoading: false,

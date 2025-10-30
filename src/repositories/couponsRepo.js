@@ -1,5 +1,5 @@
 const couponsRepo = {
-  getDataTable: async (page) => {
+  getTableInfo: async (page) => {
     await new Promise((resolve) => setTimeout(resolve, 5000));
     console.log(page);
     return {
@@ -49,7 +49,7 @@ const couponsRepo = {
           code: "qwerty",
           validity: "30 يوم",
           status: "منتهي",
-          userNumber: "0951830877",
+          userNumber: null,
           endDate: "17-10-2025",
         },
         {
@@ -71,5 +71,6 @@ const couponsRepo = {
       ],
     };
   },
+  editCoupon: () => {},
 };
 export default couponsRepo;

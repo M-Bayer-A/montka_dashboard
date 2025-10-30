@@ -2,6 +2,7 @@ import { createSlice } from "@reduxjs/toolkit";
 import { showToast } from "../../../ui/components/shared/toastProvider";
 import { checkCredentialsUseCase } from "../../useCases/login/checkCredentialsUseCase";
 import { checkOtpUseCase } from "../../useCases/login/checkOtpUseCase";
+import { setNewPasswordUseCase } from "../../useCases/login/setNewPasswordUseCase";
 //
 const initialState = {
   isLoading: false,
@@ -60,6 +61,19 @@ export const loginSlice = createSlice({
         state.isAuth = true;
       })
       .addCase(checkOtpUseCase.rejected, (state) => {
+        state.isLoading = false;
+        showToast("error", "فشل");
+        state.isAuth = false;
+      });
+    builder
+      .addCase(setNewPasswordUseCase.pending, (state) => {
+        state.isLoading = true;
+      })
+      .addCase(setNewPasswordUseCase.fulfilled, (state) => {
+        state.isLoading = false;
+        showToast("success", "نجاح");
+      })
+      .addCase(setNewPasswordUseCase.rejected, (state) => {
         state.isLoading = false;
         showToast("error", "فشل");
         state.isAuth = false;

@@ -3,6 +3,7 @@ import { setInputs } from "../../../application/states/login/loginSlice";
 import CustomTextInput from "../shared/customTextInput";
 import CustomButton from "../shared/customButton";
 import { loginSelectors } from "../../../application/states/login/loginSelectors";
+import { setNewPasswordUseCase } from "../../../application/useCases/login/setNewPasswordUseCase";
 
 export default function ResetPasswordForm({ className }) {
   //
@@ -11,11 +12,13 @@ export default function ResetPasswordForm({ className }) {
   const inputs = useSelector(loginSelectors.inputs);
   //
   const handleSetEmail = (value) => dispatch(setInputs({ email: value }));
+  const handelSubmit = () => dispatch(setNewPasswordUseCase());
   //
   return (
     <form
       onSubmit={(e) => {
         e.preventDefault();
+        handelSubmit();
       }}
       className={`${className} flex flex-col items-center w-full md:w-115 px-5 py-10 rounded-[20px] space-y-6 bg-white font-[Cairo]`}
     >
