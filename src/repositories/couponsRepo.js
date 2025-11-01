@@ -39,7 +39,7 @@ const couponsRepo = {
         {
           id: "0",
           code: "qwerty",
-          validity: "30 يوم",
+          validity: 30,
           status: "مستخدم",
           userNumber: "0951830877",
           endDate: "17-10-2025",
@@ -47,7 +47,7 @@ const couponsRepo = {
         {
           id: "1",
           code: "qwerty",
-          validity: "30 يوم",
+          validity: 30,
           status: "منتهي",
           userNumber: null,
           endDate: "17-10-2025",
@@ -55,7 +55,7 @@ const couponsRepo = {
         {
           id: "2",
           code: "qwerty",
-          validity: "30 يوم",
+          validity: 30,
           status: "متاح",
           userNumber: "0951830877",
           endDate: "17-10-2025",
@@ -63,7 +63,7 @@ const couponsRepo = {
         {
           id: "3",
           code: "qwerty",
-          validity: "30 يوم",
+          validity: 30,
           status: "مستخدم",
           userNumber: "0951830877",
           endDate: "17-10-2025",
@@ -71,6 +71,12 @@ const couponsRepo = {
       ],
     };
   },
-  editCoupon: () => {},
+  editCoupon: async () => {
+    await new Promise((resolve) => setTimeout(resolve, 5000));
+  },
+  addNewCoupon: async () => {
+    await new Promise((resolve) => setTimeout(resolve, 5000));
+  },
+  // changeName
 };
 export default couponsRepo;

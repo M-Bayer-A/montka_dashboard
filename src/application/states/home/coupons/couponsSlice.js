@@ -1,8 +1,17 @@
 import { createSlice } from "@reduxjs/toolkit";
 import { getCouponsTableInfoUseCase } from "../../../useCases/home/coupons/getCouponsTableInfoUseCase";
+import { addNewCouponUseCase } from "../../../useCases/home/coupons/addNewCouponUseCase";
 //
 const initialState = {
-  isLoading: false,
+  isDataLoading: false,
+  isActionLoading: false,
+  //
+  isPopupOpen: false,
+  popupProcess: null,
+  couponInfo: {
+    code: "",
+    validity: "",
+  },
   searchInput: "",
   tableInfo: {
     columns: [],
@@ -30,23 +39,53 @@ export const couponsSlice = createSlice({
       const { input } = actions.payload;
       state.searchInput = input;
     },
+    togglePopupOpen: (state, { payload = {} }) => {
+      const { process, code, validity } = payload;
+      state.isPopupOpen = !state.isPopupOpen;
+      state.popupProcess = process || "";
+      state.couponInfo.code = code || "";
+      state.couponInfo.validity = validity || "";
+    },
+    setCouponInfo: (state, actions) => {
+      const { code, validity } = actions.payload;
+      state.couponInfo.code = code || code == "" ? code : state.couponInfo.code;
+      state.couponInfo.validity =
+        validity || validity == "" ? validity : state.couponInfo.validity;
+    },
   },
   // ==EXTRA REDUCERS==
   extraReducers(builder) {
     builder
       .addCase(getCouponsTableInfoUseCase.pending, (state) => {
-        state.isLoading = true;
+        state.isDataLoading = true;
       })
       .addCase(getCouponsTableInfoUseCase.fulfilled, (state, actions) => {
-        state.isLoading = false;
+        state.isDataLoading = false;
         state.tableInfo = actions.payload.response;
       })
       .addCase(getCouponsTableInfoUseCase.rejected, (state) => {
-        state.isLoading = false;
+        state.isDataLoading = false;
+      });
+    builder
+      .addCase(addNewCouponUseCase.pending, (state) => {
+        state.isActionLoading = true;
+      })
+      .addCase(addNewCouponUseCase.fulfilled, (state) => {
+        state.isActionLoading = false;
+      })
+      .addCase(addNewCouponUseCase.rejected, (state) => {
+        state.isActionLoading = false;
       });
   },
 });
 //
-export const { setNumberOfRowsPerPage, setSearchInput } = couponsSlice.actions;
+export const {
+  setNumberOfRowsPerPage,
+  setSearchInput,
+  setCouponInfo,
+  setPopupClose,
+  setPopupOpen,
+  togglePopupOpen,
+} = couponsSlice.actions;
 
 export default couponsSlice.reducer;

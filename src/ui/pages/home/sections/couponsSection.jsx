@@ -10,16 +10,18 @@ import { getCouponsTableInfoUseCase } from "../../../../application/useCases/hom
 import {
   setNumberOfRowsPerPage,
   setSearchInput,
+  togglePopupOpen,
 } from "../../../../application/states/home/coupons/couponsSlice";
 import { copyTextHelper } from "../../../../helpers/copyTextHelper";
-import { Backdrop } from "@mui/material";
-import AddCouponPopup from "../../../components/home/couponsSection/addCouponPopup";
+import CouponPopup from "../../../components/home/couponsSection/couponPopup";
+import { Backdrop, CircularProgress } from "@mui/material";
 
 export default function CouponsSection() {
   //
   const dispatch = useDispatch();
   //
-  const isLoading = useSelector(couponsSelectors.isLoading);
+  const isDataLoading = useSelector(couponsSelectors.isDataLoading);
+  const isActionLoading = useSelector(couponsSelectors.isActionLoading);
   const searchInputValue = useSelector(couponsSelectors.searchInputValue);
   const paginationInfo = useSelector(couponsSelectors.paginationInfo);
   const tableInfo = useSelector(couponsSelectors.tableInfo);
@@ -32,6 +34,9 @@ export default function CouponsSection() {
 
   const handleSetRowsPerPageNum = (value) =>
     dispatch(setNumberOfRowsPerPage({ number: value }));
+
+  const handleOpenPopup = (process, code, validity) =>
+    dispatch(togglePopupOpen({ process, code, validity }));
 
   const handleCopyCoupon = (code) => copyTextHelper(code);
   //
@@ -52,9 +57,17 @@ export default function CouponsSection() {
   const processedData = tableInfo.data.map((d) => {
     const newD = {
       ...d,
+      validity: d.validity + " يوم",
       procedures: (
         <div className="flex flex-row gap-2.5">
-          {d.userNumber ? null : <a className="text-[#4F46E5]">تعديل</a>}
+          {d.userNumber ? null : (
+            <a
+              onClick={() => handleOpenPopup("edit", d.code, d.validity)}
+              className="text-[#4F46E5]"
+            >
+              تعديل
+            </a>
+          )}
           <a onClick={() => handleCopyCoupon(d.code)}>نسخ</a>
         </div>
       ),
@@ -118,9 +131,10 @@ export default function CouponsSection() {
         <CustomButton
           className={"border-[#0EA5E9] bg-[#0EA5E9] text-white font-[700]"}
           title={"+ إنشاء كود جديد"}
+          onClick={() => handleOpenPopup("add")}
         />
       </div>
-      {isLoading ? (
+      {isDataLoading ? (
         <div className="w-full h-110">
           <Skeleton width="100%" height="100%" />
         </div>
@@ -132,7 +146,15 @@ export default function CouponsSection() {
         onNumOfRowsChange={handleSetRowsPerPageNum}
         getDataHandeler={handleGetTableInfo}
       />
-      <AddCouponPopup />
+      {/* Side Component */}
+      <CouponPopup />
+      <Backdrop
+        sx={(theme) => ({ color: "#fff", zIndex: theme.zIndex.drawer + 1 })}
+        open={isActionLoading}
+      >
+        <CircularProgress color="inherit" />
+      </Backdrop>
+      {/* ==Side Component== */}
     </div>
   );
 }

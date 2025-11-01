@@ -15,9 +15,9 @@ export default function CustomPopup({
     >
       <div
         className="min-w-125 flex flex-col px-5 py-10 gap-6
-        rounded-[20px] bg-white text-black font-[Cairo] "
+        rounded-[20px] bg-white text-black font-[Cairo] text-right"
       >
-        <h1>{title}</h1>
+        <h1 className="font-bold text-[22px]">{title}</h1>
         {children}
         {/* Action Buttons */}
         <div
