@@ -10,11 +10,13 @@ import { getCouponsTableInfoUseCase } from "../../../../application/useCases/hom
 import {
   setNumberOfRowsPerPage,
   setSearchInput,
-  togglePopupOpen,
+  toggleAddPopupOpen,
+  toggleEditPopupOpen,
 } from "../../../../application/states/home/coupons/couponsSlice";
 import { copyTextHelper } from "../../../../helpers/copyTextHelper";
-import CouponPopup from "../../../components/home/couponsSection/couponPopup";
 import { Backdrop, CircularProgress } from "@mui/material";
+import EditCouponPopup from "../../../components/home/couponsSection/editCouponPopup";
+import AddCouponPopup from "../../../components/home/couponsSection/addCouponPopup";
 
 export default function CouponsSection() {
   //
@@ -23,8 +25,8 @@ export default function CouponsSection() {
   const isDataLoading = useSelector(couponsSelectors.isDataLoading);
   const isActionLoading = useSelector(couponsSelectors.isActionLoading);
   const searchInputValue = useSelector(couponsSelectors.searchInputValue);
-  const paginationInfo = useSelector(couponsSelectors.paginationInfo);
   const tableInfo = useSelector(couponsSelectors.tableInfo);
+  const paginationInfo = useSelector(couponsSelectors.paginationInfo);
   //
   const handleGetTableInfo = (page) =>
     dispatch(getCouponsTableInfoUseCase({ page }));
@@ -35,10 +37,12 @@ export default function CouponsSection() {
   const handleSetRowsPerPageNum = (value) =>
     dispatch(setNumberOfRowsPerPage({ number: value }));
 
-  const handleOpenPopup = (process, code, validity) =>
-    dispatch(togglePopupOpen({ process, code, validity }));
-
   const handleCopyCoupon = (code) => copyTextHelper(code);
+
+  const handleOpenEditPopup = (code, validity) =>
+    dispatch(toggleEditPopupOpen({ code, validity }));
+
+  const handleOpenAddPopup = () => dispatch(toggleAddPopupOpen());
   //
   useEffect(() => {
     handleGetTableInfo(1);
@@ -62,7 +66,7 @@ export default function CouponsSection() {
         <div className="flex flex-row gap-2.5">
           {d.userNumber ? null : (
             <a
-              onClick={() => handleOpenPopup("edit", d.code, d.validity)}
+              onClick={() => handleOpenEditPopup(d.code, d.validity)}
               className="text-[#4F46E5]"
             >
               تعديل
@@ -131,7 +135,7 @@ export default function CouponsSection() {
         <CustomButton
           className={"border-[#0EA5E9] bg-[#0EA5E9] text-white font-[700]"}
           title={"+ إنشاء كود جديد"}
-          onClick={() => handleOpenPopup("add")}
+          onClick={() => handleOpenAddPopup()}
         />
       </div>
       {isDataLoading ? (
@@ -147,7 +151,8 @@ export default function CouponsSection() {
         getDataHandeler={handleGetTableInfo}
       />
       {/* Side Component */}
-      <CouponPopup />
+      <EditCouponPopup />
+      <AddCouponPopup />
       <Backdrop
         sx={(theme) => ({ color: "#fff", zIndex: theme.zIndex.drawer + 1 })}
         open={isActionLoading}

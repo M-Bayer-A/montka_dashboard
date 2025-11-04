@@ -1,17 +1,16 @@
 import { createSlice } from "@reduxjs/toolkit";
 import { getCouponsTableInfoUseCase } from "../../../useCases/home/coupons/getCouponsTableInfoUseCase";
-import { addNewCouponUseCase } from "../../../useCases/home/coupons/addNewCouponUseCase";
+import { editCouponUseCase } from "../../../useCases/home/coupons/editCouponUseCase";
+import { showToast } from "../../../../ui/components/shared/toastProvider";
+import { addCouponUseCase } from "../../../useCases/home/coupons/addCouponUseCase";
 //
 const initialState = {
   isDataLoading: false,
   isActionLoading: false,
   //
-  isPopupOpen: false,
-  popupProcess: null,
-  couponInfo: {
-    code: "",
-    validity: "",
-  },
+  isAddPopupOpen: false,
+  isEditPopupOpen: false,
+  //
   searchInput: "",
   tableInfo: {
     columns: [],
@@ -24,6 +23,10 @@ const initialState = {
     nextPage: null,
     previousPage: null,
   },
+  couponInfo: {
+    code: "",
+    validity: "",
+  },
 };
 //
 export const couponsSlice = createSlice({
@@ -31,18 +34,21 @@ export const couponsSlice = createSlice({
   initialState,
   // ==REDUCERS==
   reducers: {
-    setNumberOfRowsPerPage: (state, actions) => {
-      const { number } = actions.payload;
-      state.paginationInfo.rowsPerPage = number;
-    },
     setSearchInput: (state, actions) => {
       const { input } = actions.payload;
       state.searchInput = input;
     },
-    togglePopupOpen: (state, { payload = {} }) => {
-      const { process, code, validity } = payload;
-      state.isPopupOpen = !state.isPopupOpen;
-      state.popupProcess = process || "";
+    setNumberOfRowsPerPage: (state, actions) => {
+      const { number } = actions.payload;
+      state.paginationInfo.rowsPerPage = number;
+    },
+    toggleAddPopupOpen: (state) => {
+      state.isAddPopupOpen = !state.isAddPopupOpen;
+      state.couponInfo = initialState.couponInfo;
+    },
+    toggleEditPopupOpen: (state, { payload = {} }) => {
+      const { code, validity } = payload;
+      state.isEditPopupOpen = !state.isEditPopupOpen;
       state.couponInfo.code = code || "";
       state.couponInfo.validity = validity || "";
     },
@@ -67,25 +73,39 @@ export const couponsSlice = createSlice({
         state.isDataLoading = false;
       });
     builder
-      .addCase(addNewCouponUseCase.pending, (state) => {
+      .addCase(editCouponUseCase.pending, (state) => {
         state.isActionLoading = true;
       })
-      .addCase(addNewCouponUseCase.fulfilled, (state) => {
+      .addCase(editCouponUseCase.fulfilled, (state) => {
         state.isActionLoading = false;
+        state.isEditPopupOpen = false;
+        state.couponInfo = initialState.couponInfo;
+        showToast("success", "تم تعديل الكود بنجاح");
       })
-      .addCase(addNewCouponUseCase.rejected, (state) => {
+      .addCase(editCouponUseCase.rejected, (state) => {
+        state.isActionLoading = false;
+      });
+    builder
+      .addCase(addCouponUseCase.pending, (state) => {
+        state.isActionLoading = true;
+      })
+      .addCase(addCouponUseCase.fulfilled, (state) => {
+        state.isActionLoading = false;
+        state.couponInfo = initialState.couponInfo;
+        showToast("success", "تم توليد الكود بنجاح");
+      })
+      .addCase(addCouponUseCase.rejected, (state) => {
         state.isActionLoading = false;
       });
   },
 });
 //
 export const {
+  setCouponInfo,
   setNumberOfRowsPerPage,
   setSearchInput,
-  setCouponInfo,
-  setPopupClose,
-  setPopupOpen,
-  togglePopupOpen,
+  toggleAddPopupOpen,
+  toggleEditPopupOpen,
 } = couponsSlice.actions;
 
 export default couponsSlice.reducer;

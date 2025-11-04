@@ -10,15 +10,19 @@ export default function CustomPopup({
 }) {
   return (
     <Backdrop
-      sx={(theme) => ({ color: "#fff", zIndex: theme.zIndex.drawer + 1 })}
+      sx={(theme) => ({
+        color: "#fff",
+        padding: "4px",
+        zIndex: theme.zIndex.drawer + 1,
+      })}
       open={isOpen}
     >
       <div
-        className="min-w-125 flex flex-col px-5 py-10 gap-6
+        className="min-w-full md:min-w-125 max-h-[90vh] flex flex-col px-5 py-10 gap-6  
         rounded-[20px] bg-white text-black font-[Cairo] text-right"
       >
         <h1 className="font-bold text-[22px]">{title}</h1>
-        {children}
+        <div className="w-full p-2 overflow-auto">{children}</div>
         {/* Action Buttons */}
         <div
           className="w-full flex flex-row items-center gap-5

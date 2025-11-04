@@ -13,12 +13,16 @@ import {
 import { useEffect } from "react";
 import { BsBookmarkDashFill } from "react-icons/bs";
 import { BsBookmarkDash } from "react-icons/bs";
+import AddVideoPopup from "../../../components/home/videosSection/addVideoPopup";
+import { Backdrop, CircularProgress } from "@mui/material";
+import EditVideoPopup from "../../../components/home/videosSection/editVideoPopup";
 
 export default function VideosSection() {
   //
   const dispatch = useDispatch();
   //
-  const isLoading = useSelector(videosSelectors.isLoading);
+  const isDataLoading = useSelector(videosSelectors.isDataLoading);
+  const isActionLoading = useSelector(videosSelectors.isActionLoading);
   const searchInputValue = useSelector(videosSelectors.searchInputValue);
   const paginationInfo = useSelector(videosSelectors.paginationInfo);
   const tableInfo = useSelector(videosSelectors.tableInfo);
@@ -33,6 +37,29 @@ export default function VideosSection() {
 
   const handleSetRowsPerPageNum = (value) =>
     dispatch(setNumberOfRowsPerPage({ number: value }));
+
+  // const handleOpenEditPopup = (
+  //   url,
+  //   title,
+  //   description,
+  //   mainSection,
+  //   age,
+  //   notes,
+  //   tags,
+  //   isPinned
+  // ) =>
+  //   dispatch(
+  //     toggleEditPopupOpen({
+  //       url,
+  //       title,
+  //       description,
+  //       mainSection,
+  //       age,
+  //       notes,
+  //       tags,
+  //       isPinned,
+  //     })
+  //   );
   //
   useEffect(() => {
     handleGetTableInfo(1);
@@ -60,7 +87,7 @@ export default function VideosSection() {
           title={"+ إضافة فيديو جديد"}
         />
       </div>
-      {isLoading ? (
+      {isDataLoading ? (
         <div className="w-full h-110">
           <Skeleton width="100%" height="100%" />
         </div>
@@ -75,6 +102,14 @@ export default function VideosSection() {
         onNumOfRowsChange={handleSetRowsPerPageNum}
         getDataHandeler={handleGetTableInfo}
       />
+      <AddVideoPopup />
+      <EditVideoPopup />
+      <Backdrop
+        sx={(theme) => ({ color: "#fff", zIndex: theme.zIndex.drawer + 1 })}
+        open={isActionLoading}
+      >
+        <CircularProgress color="inherit" />
+      </Backdrop>
     </div>
   );
 }

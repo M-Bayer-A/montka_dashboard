@@ -71,11 +71,13 @@ const couponsRepo = {
       ],
     };
   },
-  editCoupon: async () => {
-    await new Promise((resolve) => setTimeout(resolve, 5000));
+  editCoupon: async (couponInfo) => {
+    await new Promise((resolve) => setTimeout(resolve, 2000));
+    console.log("from the repo", couponInfo);
   },
-  addNewCoupon: async () => {
+  addCoupon: async (couponInfo) => {
     await new Promise((resolve) => setTimeout(resolve, 5000));
+    console.log("from the repo", couponInfo);
   },
   // changeName
 };

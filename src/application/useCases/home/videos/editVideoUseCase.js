@@ -1,11 +1,11 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
-import couponsRepo from "../../../../repositories/couponsRepo";
+import videosRepo from "../../../../repositories/videosRepo";
 
-export const addNewCouponUseCase = createAsyncThunk(
-  "coupons/addNewCoupon",
+export const editVideoUseCase = createAsyncThunk(
+  "videos/editVideo",
   async (_, { rejectWithValue }) => {
     try {
-      const response = await couponsRepo.addNewCoupon();
+      const response = await videosRepo.editVideo();
       return { success: true, response: response };
     } catch (err) {
       // return rejectWithValue(err.response?.data || "Something went wrong");

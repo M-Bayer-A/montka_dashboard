@@ -53,5 +53,11 @@ const videosRepo = {
       ],
     };
   },
+  editVideo: async () => {
+    await new Promise((resolve) => setTimeout(resolve, 5000));
+  },
+  addVideo: async () => {
+    await new Promise((resolve) => setTimeout(resolve, 5000));
+  },
 };
 export default videosRepo;
