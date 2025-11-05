@@ -130,6 +130,8 @@ export const videosSlice = createSlice({
       })
       .addCase(editVideoUseCase.fulfilled, (state) => {
         state.isActionLoading = false;
+        state.isEditPopupOpen = false;
+        state.videoInfo = initialState.videoInfo;
         showToast("success", "تم تعديل الفيديو بنجاح");
       })
       .addCase(editVideoUseCase.rejected, (state) => {
@@ -141,6 +143,8 @@ export const videosSlice = createSlice({
       })
       .addCase(addVideoUseCase.fulfilled, (state) => {
         state.isActionLoading = false;
+        state.isAddPopupOpen = false;
+        state.videoInfo = initialState.videoInfo;
         showToast("success", "تم إضافة الفيديو بنجاح");
       })
       .addCase(addVideoUseCase.rejected, (state) => {

@@ -1,29 +1,16 @@
-import { Backdrop } from "@mui/material";
 import CustomTextInput from "../../shared/customTextInput";
-import CustomButton from "../../shared/customButton";
-import CustomPopup from "../../shared/customPopup";
 import CustomTextArea from "../../shared/customTextArea";
 import CustomSelect from "../../shared/customSelect";
 import { useDispatch, useSelector } from "react-redux";
 import { videosSelectors } from "../../../../application/states/home/videos/videosSelectors";
-import {
-  setVideoInfo,
-  toggleAddPopupOpen,
-} from "../../../../application/states/home/videos/videosSlice";
-import { addVideoUseCase } from "../../../../application/useCases/home/videos/addVideoUseCase";
+import { setVideoInfo } from "../../../../application/states/home/videos/videosSlice";
 
-export default function AddVideoPopup() {
+export default function VideosPopupContent() {
   //
   const dispatch = useDispatch();
   //
-  const isOpen = useSelector(videosSelectors.isAddPopupOpen);
   const videoInfo = useSelector(videosSelectors.videoInfo);
-  console.log(videoInfo);
   //
-  const handleClosePopup = () => dispatch(toggleAddPopupOpen());
-
-  const handleSubmit = () => dispatch(addVideoUseCase());
-
   const handleSetURL = (value) => dispatch(setVideoInfo({ url: value }));
 
   const handleSetTitle = (value) => dispatch(setVideoInfo({ title: value }));
@@ -53,12 +40,7 @@ export default function AddVideoPopup() {
   ];
   //
   return (
-    <CustomPopup
-      isOpen={isOpen}
-      onSubmit={handleSubmit}
-      onClose={handleClosePopup}
-      title="إضافة فيديو جديد"
-    >
+    <>
       <div dir="rtl" className="flex flex-col gap-5">
         <div className="flex flex-col gap-2">
           <label>رابط اليوتيوب</label>
@@ -123,6 +105,6 @@ export default function AddVideoPopup() {
           <label>تثبيت الفيديو في أعلى القائمة</label>
         </div>
       </div>
-    </CustomPopup>
+    </>
   );
 }
