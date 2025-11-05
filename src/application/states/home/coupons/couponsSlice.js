@@ -91,6 +91,7 @@ export const couponsSlice = createSlice({
       })
       .addCase(addCouponUseCase.fulfilled, (state) => {
         state.isActionLoading = false;
+        state.isAddPopupOpen = false;
         state.couponInfo = initialState.couponInfo;
         showToast("success", "تم توليد الكود بنجاح");
       })

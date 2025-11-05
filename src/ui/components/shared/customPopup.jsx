@@ -5,6 +5,7 @@ export default function CustomPopup({
   children,
   isOpen,
   title = "",
+  disableSubmit = false,
   onSubmit = () => {},
   onClose = () => {},
 }) {
@@ -37,6 +38,7 @@ export default function CustomPopup({
             className={"bg-[#0EA5E9] border-[#0EA5E9] text-white"}
             title="تأكيد"
             onClick={onSubmit}
+            disabled={disableSubmit}
           />
         </div>
         {/* ==Action Buttons== */}
