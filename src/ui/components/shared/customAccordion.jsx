@@ -3,11 +3,13 @@ import { customIcons, getIcon } from "../../../helpers/iconsHelper";
 
 export default function CustomAccordion({
   children,
-  className,
+  className = "",
   image = "",
-  title,
-  moveUpHandler,
-  moveDownHandler,
+  title = "",
+  moveUpHandler = () => {},
+  moveDownHandler = () => {},
+  editHandler = () => {},
+  deleteHandler = () => {},
 }) {
   const ref = useRef();
   const [height, setHeight] = useState();
@@ -47,8 +49,12 @@ export default function CustomAccordion({
               <img src={getIcon(customIcons.arrow)} className="size-6" />
             </button>
           </div>
-          <a className="text-[#E24C4C]">حذف</a>
-          <a className="text-[#4F46E5]">تعديل</a>
+          <a className="text-[#E24C4C]" onClick={deleteHandler}>
+            حذف
+          </a>
+          <a className="text-[#4F46E5]" onClick={editHandler}>
+            تعديل
+          </a>
         </div>
         {/* ==actions buttons== */}
         <div className="flex flex-row gap-4 items-center">

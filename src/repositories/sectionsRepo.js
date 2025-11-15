@@ -1,5 +1,5 @@
 const sectionsRepo = {
-  getSectionsInfo: async () => {
+  get: async () => {
     await new Promise((resolve) => setTimeout(resolve, 5000));
     return [
       {
@@ -42,6 +42,15 @@ const sectionsRepo = {
         subSection: null,
       },
     ];
+  },
+  edit: async () => {
+    await new Promise((resolve) => setTimeout(resolve, 5000));
+  },
+  add: async () => {
+    await new Promise((resolve) => setTimeout(resolve, 5000));
+  },
+  delete: async () => {
+    await new Promise((resolve) => setTimeout(resolve, 5000));
   },
 };
 export default sectionsRepo;

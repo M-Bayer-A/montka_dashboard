@@ -1,11 +1,11 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import sectionsRepo from "../../../../repositories/sectionsRepo";
 
-export const getSectionsOrderUseCase = createAsyncThunk(
-  "sections/getSectionsOrder",
+export const editSectionUseCase = createAsyncThunk(
+  "sections/editSection",
   async (_, { rejectWithValue }) => {
     try {
-      const response = await sectionsRepo.get();
+      const response = await sectionsRepo.edit();
       return { success: true, response: response };
     } catch (err) {
       // return rejectWithValue(err.response?.data || "Something went wrong");

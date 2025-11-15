@@ -1,11 +1,24 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { getSectionsInfoUseCase } from "../../../useCases/home/sections/getSectionsInfoUseCase";
+import { getSectionsOrderUseCase } from "../../../useCases/home/sections/getSectionsInfoUseCase";
+import { editSectionUseCase } from "../../../useCases/home/sections/editSectionUseCase";
+import { addSectionUseCase } from "../../../useCases/home/sections/addSectionUseCase";
+import { deleteSectionUseCase } from "../../../useCases/home/sections/deleteSectionUseCase";
+import { showToast } from "../../../../ui/components/shared/toastProvider";
 
 //
 const initialState = {
-  isLoading: false,
-  searchInput: "",
-  sectionsInfo: [],
+  isDataLoading: false,
+  isActionLoading: false,
+  //
+  isAddPopupOpen: false,
+  isEditPopupOpen: false,
+  isDeletePopupOpen: false,
+  //
+  sectionsOrder: [],
+  sectionInfo: {
+    name: "",
+    imageUrl: "",
+  },
 };
 //
 export const sectionsSlice = createSlice({
@@ -15,41 +28,108 @@ export const sectionsSlice = createSlice({
   reducers: {
     moveUp: (state, actions) => {
       const { id } = actions.payload;
-      const index = state.sectionsInfo.findIndex((s) => s.id === id);
+      const index = state.sectionsOrder.findIndex((s) => s.id === id);
       if (index > 0) {
-        const temp = state.sectionsInfo[index - 1];
-        state.sectionsInfo[index - 1] = state.sectionsInfo[index];
-        state.sectionsInfo[index] = temp;
+        const temp = state.sectionsOrder[index - 1];
+        state.sectionsOrder[index - 1] = state.sectionsOrder[index];
+        state.sectionsOrder[index] = temp;
       }
     },
     moveDown: (state, action) => {
       const { id } = action.payload;
-      const index = state.sectionsInfo.findIndex(
+      const index = state.sectionsOrder.findIndex(
         (section) => section.id === id
       );
-      if (index < state.sectionsInfo.length - 1 && index !== -1) {
-        const temp = state.sectionsInfo[index + 1];
-        state.sectionsInfo[index + 1] = state.sectionsInfo[index];
-        state.sectionsInfo[index] = temp;
+      if (index < state.sectionsOrder.length - 1 && index !== -1) {
+        const temp = state.sectionsOrder[index + 1];
+        state.sectionsOrder[index + 1] = state.sectionsOrder[index];
+        state.sectionsOrder[index] = temp;
       }
+    },
+    toggleAddPopupOpen: (state) => {
+      state.isAddPopupOpen = !state.isAddPopupOpen;
+      state.sectionInfo = initialState.sectionInfo;
+    },
+    toggleEditPopupOpen: (state, { payload = {} }) => {
+      const { name, imageUrl } = payload;
+      state.isEditPopupOpen = !state.isEditPopupOpen;
+      //
+      state.sectionInfo.name = name || "";
+      state.sectionInfo.imageUrl = imageUrl || "";
+    },
+    toggleDeletePopupOpen: (state) => {
+      state.isDeletePopupOpen = !state.isDeletePopupOpen;
+    },
+    setSectionInfo: (state, actions) => {
+      const { name, imageUrl } = actions.payload;
+      state.sectionInfo.name =
+        name || name == "" ? name : state.sectionInfo.name;
+
+      state.sectionInfo.imageUrl =
+        imageUrl || imageUrl == "" ? imageUrl : state.sectionInfo.imageUrl;
     },
   },
   // ==EXTRA REDUCERS==
   extraReducers(builder) {
     builder
-      .addCase(getSectionsInfoUseCase.pending, (state) => {
-        state.isLoading = true;
+      .addCase(getSectionsOrderUseCase.pending, (state) => {
+        state.isDataLoading = true;
       })
-      .addCase(getSectionsInfoUseCase.fulfilled, (state, actions) => {
-        state.isLoading = false;
-        state.sectionsInfo = actions.payload.response;
+      .addCase(getSectionsOrderUseCase.fulfilled, (state, actions) => {
+        state.isDataLoading = false;
+        state.sectionsOrder = actions.payload.response;
       })
-      .addCase(getSectionsInfoUseCase.rejected, (state) => {
-        state.isLoading = false;
+      .addCase(getSectionsOrderUseCase.rejected, (state) => {
+        state.isDataLoading = false;
+      });
+    builder
+      .addCase(addSectionUseCase.pending, (state) => {
+        state.isActionLoading = true;
+      })
+      .addCase(addSectionUseCase.fulfilled, (state) => {
+        state.isActionLoading = false;
+        state.sectionInfo = initialState.sectionInfo;
+        state.isAddPopupOpen = false;
+        showToast("success", "تمت إضافة القسم بنجاح");
+      })
+      .addCase(addSectionUseCase.rejected, (state) => {
+        state.isActionLoading = false;
+      });
+    builder
+      .addCase(editSectionUseCase.pending, (state) => {
+        state.isActionLoading = true;
+      })
+      .addCase(editSectionUseCase.fulfilled, (state) => {
+        state.isActionLoading = false;
+        state.sectionInfo = initialState.sectionInfo;
+        state.isEditPopupOpen = false;
+        showToast("success", "تم التعديل بنجاح");
+      })
+      .addCase(editSectionUseCase.rejected, (state) => {
+        state.isActionLoading = false;
+      });
+    builder
+      .addCase(deleteSectionUseCase.pending, (state) => {
+        state.isActionLoading = true;
+      })
+      .addCase(deleteSectionUseCase.fulfilled, (state) => {
+        state.isActionLoading = false;
+        state.isDeletePopupOpen = false;
+        showToast("success", "تم حذف القسم بنجاح");
+      })
+      .addCase(deleteSectionUseCase.rejected, (state) => {
+        state.isActionLoading = false;
       });
   },
 });
 //
-export const { moveDown, moveUp } = sectionsSlice.actions;
+export const {
+  moveDown,
+  moveUp,
+  toggleAddPopupOpen,
+  toggleEditPopupOpen,
+  toggleDeletePopupOpen,
+  setSectionInfo,
+} = sectionsSlice.actions;
 
 export default sectionsSlice.reducer;
