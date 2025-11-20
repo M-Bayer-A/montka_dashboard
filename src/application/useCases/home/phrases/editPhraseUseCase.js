@@ -1,12 +1,11 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import phrasesRepo from "../../../../repositories/phrasesRepo";
 
-export const getPhrasesTableInfoUseCase = createAsyncThunk(
-  "phrases/getPhrasesTableInfo",
-  async (params = { page: 1 }, { rejectWithValue }) => {
+export const editPhraseUseCase = createAsyncThunk(
+  "phrases/editPhrase",
+  async (_, { rejectWithValue }) => {
     try {
-      console.log("from get data use case");
-      const response = await phrasesRepo.getTableInfo(params.page);
+      const response = await phrasesRepo.edit();
       return { success: true, response: response };
     } catch (err) {
       // return rejectWithValue(err.response?.data || "Something went wrong");

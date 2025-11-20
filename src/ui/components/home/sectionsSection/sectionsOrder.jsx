@@ -54,8 +54,18 @@ export default function SectionsOrder() {
                     className="w-full flex flex-row justify-between p-2.5 gap-2.5 bg-white rounded-[7px]"
                   >
                     <div className="flex flex-row gap-2.5">
-                      <a className="text-[#E24C4C]">حذف</a>
-                      <a className="text-[#4F46E5]">تعديل</a>
+                      <a
+                        onClick={() => handleOpenDeletePopup()}
+                        className="text-[#E24C4C]"
+                      >
+                        حذف
+                      </a>
+                      <a
+                        onClick={() => handleOpenEditPopup(u.title, u.image)}
+                        className="text-[#4F46E5]"
+                      >
+                        تعديل
+                      </a>
                     </div>
                     <p className="text-[#717886]">{u.title}</p>
                   </div>
