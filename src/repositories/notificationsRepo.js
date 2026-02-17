@@ -65,5 +65,8 @@ const notificationsRepo = {
       ],
     };
   },
+  add: async () => {
+    await new Promise((resolve) => setTimeout(resolve, 5000));
+  },
 };
 export default notificationsRepo;

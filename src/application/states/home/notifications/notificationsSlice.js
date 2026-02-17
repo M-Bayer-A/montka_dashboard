@@ -1,8 +1,13 @@
 import { createSlice } from "@reduxjs/toolkit";
 import { getNotificationsTableInfoUseCase } from "../../../useCases/home/notifications/getNotificationsTableInfoUseCase";
+import { addNotificationUseCase } from "../../../useCases/home/notifications/addNotificationUseCase";
+import { showToast } from "../../../../ui/components/shared/toastProvider";
 //
 const initialState = {
-  isLoading: false,
+  isDataLoading: false,
+  isActionLoading: false,
+  //
+  isAddPopupOpen: false,
   searchInput: "",
   tableInfo: {
     columns: [],
@@ -14,6 +19,11 @@ const initialState = {
     currentPage: null,
     nextPage: null,
     previousPage: null,
+  },
+  notificationInfo: {
+    title: "",
+    message: "",
+    audience: "all",
   },
 };
 //
@@ -30,24 +40,53 @@ export const notificationsSlice = createSlice({
       const { input } = actions.payload;
       state.searchInput = input;
     },
+    toggleAddPopupOpen: (state) => {
+      state.isAddPopupOpen = !state.isAddPopupOpen;
+      state.notificationInfo = initialState.notificationInfo;
+    },
+    setNotificationInfo: (state, actions) => {
+      const { title, message } = actions.payload;
+      state.notificationInfo.title =
+        title || title == "" ? title : state.notificationInfo.title;
+
+      state.notificationInfo.message =
+        message || message == "" ? message : state.notificationInfo.message;
+    },
   },
   // ==EXTRA REDUCERS==
   extraReducers(builder) {
     builder
       .addCase(getNotificationsTableInfoUseCase.pending, (state) => {
-        state.isLoading = true;
+        state.isDataLoading = true;
       })
       .addCase(getNotificationsTableInfoUseCase.fulfilled, (state, actions) => {
-        state.isLoading = false;
+        state.isDataLoading = false;
         state.tableInfo = actions.payload.response;
       })
       .addCase(getNotificationsTableInfoUseCase.rejected, (state) => {
-        state.isLoading = false;
+        state.isDataLoading = false;
+      });
+    builder
+      .addCase(addNotificationUseCase.pending, (state) => {
+        state.isActionLoading = true;
+      })
+      .addCase(addNotificationUseCase.fulfilled, (state) => {
+        state.isActionLoading = false;
+        state.isAddPopupOpen = false;
+        state.phraseInfo = initialState.phraseInfo;
+        showToast("success", "تم إرسال إشعار بنجاح");
+      })
+      .addCase(addNotificationUseCase.rejected, (state) => {
+        state.isActionLoading = false;
       });
   },
 });
 //
-export const { setNumberOfRowsPerPage, setSearchInput } =
-  notificationsSlice.actions;
+export const {
+  setNumberOfRowsPerPage,
+  setSearchInput,
+  setNotificationInfo,
+  toggleAddPopupOpen,
+} = notificationsSlice.actions;
 
 export default notificationsSlice.reducer;
