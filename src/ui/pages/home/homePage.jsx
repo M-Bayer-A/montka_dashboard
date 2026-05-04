@@ -2,11 +2,11 @@ import { useState } from "react";
 import { Outlet, useLocation, useNavigate } from "react-router-dom";
 import { customIcons, getIcon } from "../../../helpers/iconsHelper";
 import CustomAppBar from "../../components/shared/customAppBar";
-import SideBar from "../../components/shared/customSideBar/SideBar";
-import SideBarContent from "../../components/shared/customSideBar/SideBarContent";
-import SideBarButton from "../../components/shared/customSideBar/SideBarButton";
-import SideBarFooter from "../../components/shared/customSideBar/SideBarFooter";
-import MainContent from "../../components/shared/customSideBar/MainContent";
+import SideBar from "../../components/shared/customSideBar/sideBar";
+import SideBarContent from "../../components/shared/customSideBar/sideBarContent";
+import SideBarButton from "../../components/shared/customSideBar/sideBarButton";
+import SideBarFooter from "../../components/shared/customSideBar/sideBarFooter";
+import MainContent from "../../components/shared/customSideBar/mainContent";
 import SideBarProvider from "../../components/shared/customSideBar/sideBarProvider";
 import SideBarHeader from "../../components/shared/customSideBar/sideBarHeader";
 
