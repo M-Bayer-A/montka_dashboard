@@ -16,5 +16,5 @@ export const customIcons = {
 };
 
 export function getIcon(icon) {
-  return "src/assets/icons/" + icon;
+  return "/icons/" + icon;
 }

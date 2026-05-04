@@ -8,13 +8,13 @@ import { Provider } from "react-redux";
 import ToastProvider from "./ui/components/shared/toastProvider.jsx";
 
 createRoot(document.getElementById("root")).render(
-  <StrictMode>
-    <BrowserRouter>
-      <Provider store={store}>
-        <ToastProvider>
-          <App />
-        </ToastProvider>
-      </Provider>
-    </BrowserRouter>
-  </StrictMode>
+  // <StrictMode>
+  <BrowserRouter>
+    <Provider store={store}>
+      <ToastProvider>
+        <App />
+      </ToastProvider>
+    </Provider>
+  </BrowserRouter>,
+  //  </StrictMode>
 );

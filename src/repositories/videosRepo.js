@@ -28,25 +28,25 @@ const videosRepo = {
       data: [
         {
           id: "0",
-          video: { image: "src/assets/images/code.jpg", title: "كرة القدم" },
+          video: { image: "/images/code.jpg", title: "كرة القدم" },
           section: "الرياضة",
           pinned: true,
         },
         {
           id: "1",
-          video: { image: "src/assets/images/code.jpg", title: "كرة القدم" },
+          video: { image: "/images/code.jpg", title: "كرة القدم" },
           section: "الرياضة",
           pinned: true,
         },
         {
           id: "2",
-          video: { image: "src/assets/images/code.jpg", title: "كرة القدم" },
+          video: { image: "/images/code.jpg", title: "كرة القدم" },
           section: "الرياضة",
           pinned: false,
         },
         {
           id: "3",
-          video: { image: "src/assets/images/code.jpg", title: "كرة القدم" },
+          video: { image: "/images/code.jpg", title: "كرة القدم" },
           section: "الرياضة",
           pinned: false,
         },
